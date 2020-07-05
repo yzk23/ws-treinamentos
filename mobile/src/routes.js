@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Training from './pages/Training';
+import ListOfTrainings from './pages/ListOfTrainings';
+import Quiz from './pages/Quiz';
 
 const AppStack = createStackNavigator();
 
@@ -15,6 +17,8 @@ const Routes = () => {
         <AppStack.Screen name="Login" component={Login} />
         <AppStack.Screen name="Profile" component={Profile} />
         <AppStack.Screen name="Training" component={Training} />
+        <AppStack.Screen name="ListOfTrainings" component={ListOfTrainings} />
+        <AppStack.Screen name="Quiz" component={Quiz} />
       </AppStack.Navigator>
     </NavigationContainer>
   );

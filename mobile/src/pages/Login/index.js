@@ -12,7 +12,7 @@ const Login = () => {
   const navigation = useNavigation();
 
   function handleNavigationToTraining() {
-    navigation.navigate('Training');
+    navigation.navigate('Profile');
   }
 
   return (
