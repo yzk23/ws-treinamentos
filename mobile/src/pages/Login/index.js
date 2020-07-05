@@ -6,16 +6,13 @@ import styles from './styles';
 import logo from '../../assets/logo.png';
 
 const Login = () => {
-  const [cpf, setCpf] = useState('');
+  const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
 
   const navigation = useNavigation();
 
   function handleNavigationToTraining() {
-    navigation.navigate('Training', {
-      cpf,
-      password
-    });
+    navigation.navigate('Training');
   }
 
   return (
@@ -24,10 +21,10 @@ const Login = () => {
         <Image style={styles.logo} source={logo} />
 
         <TextInput
-          value={cpf}
+          value={user}
           style={styles.input}
-          placeholder="CPF"
-          onChangeText={setCpf}
+          placeholder="Usuário"
+          onChangeText={setUser}
           maxLength={11}
         />
 
