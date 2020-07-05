@@ -1,62 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, Text, ProgressBarAndroid, Image } from 'react-native';
-import { useRoute } from '@react-navigation/native';
 import { AntDesign as Icon } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
 
-import teste from '../../assets/encanamento_agua.png';
-import teste2 from '../../assets/bomba_agua.png';
-import teste3 from '../../assets/galao_agua.png';
-import teste4 from '../../assets/galao_combustivel.png';
+import image from '../../assets/encanamento_agua.png';
+import image2 from '../../assets/bomba_agua.png';
+import image3 from '../../assets/galao_agua.png';
+import image4 from '../../assets/galao_combustivel.png';
 
 const data = [
   {
     title: 'Abastecimento de água potável e combustível',
-    image: teste,
-    text: 'fkjhaskjdf hskdahfksdakfkashdf',
+    image: image,
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure',
   },
   {
     title: 'Abastecimento de água potável',
-    image: teste2,
-    text: '32154312135sadhskdahfksdakfkashdf',
+    image: image2,
+    text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia',
   },
   {
     title: 'Abastecimento de combustível',
-    image: teste3,
-    text: 'asda65s4fsd23f1343ds1hskdahfksdakfkashdf',
+    image: image3,
+    text: 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem',
   },
   {
     title: 'Abastecimento de aslkdjsakdjas',
-    image: teste4,
-    text: '65154653545s4d5s',
+    image: image4,
+    text: 'Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
   },
 ]
 
 const Training = () => {
-  const route = useRoute();
-  const routeParams = route.params;
-
-  
-  const progressRate = 1 / data.length;
+  const progressRate = 1 / (data.length - 1);
   const [progressValue, setProgressValue] = useState(0);
-  const [currentData, setCurrentDate] = useState({});
-  const [currentIndexArray, setCurrentIndexArray] = useState(0);
-  
+  const [pageData, setPageData] = useState({});
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    setPageData(data[index]);
+  }, [index]);
+
   function handleLeftButton() {
     if (progressValue > 0) {
       setProgressValue(progressValue - progressRate);
-      setCurrentIndexArray(currentIndexArray - 1);
     }
+    setIndex((index - 1 < 0) ? index : index - 1);
   }
   
   function handleRightButton() {
     if (progressValue < 1) {
       setProgressValue(progressValue + progressRate);
-      setCurrentIndexArray(currentIndexArray + 1);
-      console.log(currentIndexArray);
     }
+    setIndex((index + 1 > data.length - 1) ? index : index + 1);
   }
 
   return (
@@ -69,25 +67,30 @@ const Training = () => {
           indeterminate={false}
           progress={progressValue}
         />
-
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.title}>{data[currentIndexArray].title}</Text>
-        <Image source={data[currentIndexArray].image} style={styles.image} />
-        <Text style={styles.text}>{data[currentIndexArray].text}</Text>
-        {/* <Text style={styles.text}>Oi, {routeParams.cpf}</Text> */}
-        {/* <Text style={styles.text}>Sua senha é {routeParams.password}</Text> */}
+        <Text style={styles.title}>{pageData.title}</Text>
+        <Image source={pageData.image} style={styles.image} />
+        <Text style={styles.text}>{pageData.text}</Text>
       </View>
 
       <View style={styles.footer}>
-        {progressValue !== 0 ? (
-          <TouchableOpacity style={styles.buttonLeft} onPress={handleLeftButton}>
-            <Icon name="left" color="#fff" size={30} />
-          </TouchableOpacity>
-        ) : (<View></View>)}
+        {progressValue !== 0
+          ? (
+            <TouchableOpacity
+              style={styles.buttonLeft}
+              onPress={handleLeftButton}
+            >
+              <Icon name="left" color="#fff" size={30} />
+            </TouchableOpacity>
+          )
+          : (<View></View>)}
 
-        <TouchableOpacity style={styles.buttonRight} onPress={handleRightButton}>
+        <TouchableOpacity
+          style={styles.buttonRight}
+          onPress={handleRightButton}
+        >
           <Icon name="right" color="#fff" size={30} />
         </TouchableOpacity>
       </View>

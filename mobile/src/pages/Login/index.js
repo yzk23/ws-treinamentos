@@ -12,6 +12,9 @@ const Login = () => {
 
   const navigation = useNavigation();
 
+  function handleNavigationToTraining() {
+    navigation.navigate('Profile');
+
   function Sign() {
     db.auth().signInWithEmailAndPassword(email, password)
       .then(result => {
@@ -30,13 +33,6 @@ const Login = () => {
           return Alert.alert("A senha está incorreta")
         }
       })
-  }
-
-  function handleNavigationToTraining(user) {
-    navigation.navigate('Training', {
-      email,
-      password
-    });
   }
 
   return (
