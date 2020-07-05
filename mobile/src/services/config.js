@@ -10,5 +10,4 @@ let config = {
     appId: "1:295276616420:web:19d8d441fb719299476af1"
 };
 
-// let app = firebase.initializeApp(config)
 export const db = !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
