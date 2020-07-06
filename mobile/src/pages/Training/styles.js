@@ -63,11 +63,65 @@ export default StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 18,
-    marginTop: 15
+    marginTop: 15,
+    textAlign: 'center'
   },
 
   image: {
     width: 400,
     height: 300,
-  }
+  },
+
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+
+  modalView: {
+    margin: 20,
+    backgroundColor: "#2196F3",
+    borderRadius: 20,
+    padding: 15,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    height: 150,
+    width: 300
+  },
+
+  openButton: {
+    backgroundColor: "#F194FF",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    // height: 100,
+    width: 100
+  },
+
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+
+  buttonContainer: {
+    flexDirection: 'row',
+    // justifyContent: 'space-around'
+  },
 })
