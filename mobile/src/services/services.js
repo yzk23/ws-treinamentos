@@ -5,7 +5,6 @@ const API = {
 
     },
     POST: function Post(obj) {
-        console.log(obj)
         var database = db.database()
         database.ref("Treinamento/" + id).push({
             title: "",
