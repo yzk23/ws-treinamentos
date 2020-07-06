@@ -7,6 +7,12 @@ Solução criada para o desafio da empresa [**Wilson Sons**](wilsonsons.com.br) 
 * [Expo](https://docs.expo.io/)
 * [Firebase](https://firebase.google.com/)
 
+## Instalando dependências
+A primeira etapa consiste na instalação das dependências do projeto:
+```
+$ npm install
+```
+
 ## Equipe
 - Isaac Medeiros (Dev): [@yzk23](https://github.com/yzk23)
 - Nillia Sousa (Designer): [@nillias](https://github.com/nillias)
