@@ -25,7 +25,6 @@ const Login = () => {
         }
       })
       .catch(error => {
-        console.log(error.code, error.message)
         if (error.code == "auth/user-not-found") {
           return Alert.alert("Email não cadastrado")
         } else if (error.code == "auth/invalid-email") {
