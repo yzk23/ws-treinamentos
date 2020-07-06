@@ -7,6 +7,7 @@ import Profile from './pages/Profile';
 import Training from './pages/Training';
 import ListOfTrainings from './pages/ListOfTrainings';
 import Quiz from './pages/Quiz';
+import Congratulations from './pages/Congratulations';
 
 const AppStack = createStackNavigator();
 
@@ -19,6 +20,7 @@ const Routes = () => {
         <AppStack.Screen name="Training" component={Training} />
         <AppStack.Screen name="ListOfTrainings" component={ListOfTrainings} />
         <AppStack.Screen name="Quiz" component={Quiz} />
+        <AppStack.Screen name="Congratulations" component={Congratulations} />
       </AppStack.Navigator>
     </NavigationContainer>
   );

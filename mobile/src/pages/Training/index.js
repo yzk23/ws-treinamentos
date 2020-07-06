@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, ProgressBarAndroid, Image } from 'react-native';
+import { SafeAreaView, View, Text, ProgressBarAndroid, Image, Alert, Modal, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { AntDesign as Icon } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
 
@@ -27,34 +27,50 @@ const data = [
     text: 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem',
   },
   {
-    title: 'Abastecimento de aslkdjsakdjas',
+    title: 'Abastecimento de óleo',
     image: image4,
     text: 'Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
   },
 ]
 
 const Training = () => {
+  const navigation = useNavigation();
+
   const progressRate = 1 / (data.length - 1);
   const [progressValue, setProgressValue] = useState(0);
   const [pageData, setPageData] = useState({});
   const [index, setIndex] = useState(0);
-
+  const [modalVisible, setModalVisible] = useState(false);
+  
   useEffect(() => {
     setPageData(data[index]);
   }, [index]);
-
+  
+  function handleNavigationToQuiz() {
+    changeModalVisible();
+    navigation.navigate('Quiz');
+  }
+  
   function handleLeftButton() {
     if (progressValue > 0) {
       setProgressValue(progressValue - progressRate);
     }
     setIndex((index - 1 < 0) ? index : index - 1);
   }
-  
+
   function handleRightButton() {
     if (progressValue < 1) {
       setProgressValue(progressValue + progressRate);
     }
     setIndex((index + 1 > data.length - 1) ? index : index + 1);
+
+    if (index === data.length - 1) {
+      changeModalVisible();
+    }
+  }
+
+  function changeModalVisible() {
+    setModalVisible(!modalVisible);
   }
 
   return (
@@ -94,6 +110,38 @@ const Training = () => {
           <Icon name="right" color="#fff" size={30} />
         </TouchableOpacity>
       </View>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Você deseja fazer o questionário agora?</Text>
+
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={{ ...styles.openButton, backgroundColor: "#05bae3" }}
+                onPress={handleNavigationToQuiz}
+              >
+                <Text style={styles.textStyle}>Sim</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={{ ...styles.openButton, backgroundColor: "red" }}
+                onPress={changeModalVisible}
+              >
+                <Text style={styles.textStyle}>Não</Text>
+              </TouchableOpacity>
+            </View>
+
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }

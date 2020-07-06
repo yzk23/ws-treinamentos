@@ -14,6 +14,7 @@ const Login = () => {
 
   function handleNavigationToTraining() {
     navigation.navigate('Profile');
+  }
 
   function Sign() {
     db.auth().signInWithEmailAndPassword(email, password)
@@ -51,7 +52,7 @@ const Login = () => {
         <TextInput
           value={password}
           style={styles.input}
-          secureTextEntry={hidePassword}
+          secureTextEntry={true}
           placeholder="Senha"
           onChangeText={setPassword}
         />
